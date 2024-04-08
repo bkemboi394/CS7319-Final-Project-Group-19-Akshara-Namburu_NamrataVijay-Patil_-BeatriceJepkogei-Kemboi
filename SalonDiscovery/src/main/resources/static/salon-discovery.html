@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Salons</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrapper">
+    <h1>Search Salons</h1>
+    <form id="searchForm" class="search-form">
+        <div class="form-group zip-search">
+            <input type="text" id="zipCode" name="zipCode" placeholder="Enter Zip Code" required>
+            <button type="submit" class="btn">Search</button>
+        </div>
+    </form>
+    <div id="salonList" class="salon-list"></div>
+</div>
+<script src="script.js" defer></script>
+</body>
+</html>

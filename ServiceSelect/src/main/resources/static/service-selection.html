@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Selection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrapper">
+    <h1>Service Selection</h1>
+    <div id="servicesList" class="salon-list"></div> <!-- Use "salon-list" for similar styling -->
+    <button id="submitBtn" class="btn">Submit Selected Services</button> <!-- Use "btn" for consistent button styling -->
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        ensureSessionId();
+        const urlParams = new URLSearchParams(window.location.search);
+        const salonId = urlParams.get('salonId');
+        fetchServices(salonId);
+    });
+
+    function ensureSessionId() {
+        if (!sessionStorage.getItem('sessionId')) {
+            const newSessionId = 'ss-' + Math.random().toString(36).substr(2, 9);
+            sessionStorage.setItem('sessionId', newSessionId);
+        }
+    }
+
+    function fetchServices(salonId) {
+        fetch(`http://localhost:8082/services/salon/${salonId}`)
+            .then(response => response.json())
+            .then(services => {
+                const servicesList = document.getElementById('servicesList');
+                services.forEach(service => {
+                    const label = document.createElement('label');
+                    label.className = 'service-item'; // Ensure this class is styled appropriately in CSS for layout
+                    label.textContent = `${service.serviceName} - $${service.price}`;
+
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.value = service.id;
+
+                    label.insertBefore(checkbox, label.firstChild); // Inserts the checkbox before the text
+                    servicesList.appendChild(label);
+                });
+            })
+            .catch(error => console.error('Failed to fetch services:', error));
+    }
+
+    document.getElementById('submitBtn').addEventListener('click', function() {
+        const sessionId = sessionStorage.getItem('sessionId');
+        const selectedServiceCheckboxes = document.querySelectorAll('#servicesList input[type="checkbox"]:checked');
+        const selectedServiceIds = Array.from(selectedServiceCheckboxes).map(checkbox => checkbox.value);
+
+        fetch(`http://localhost:8082/session/save`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sessionId: sessionId,
+                selectedServices: selectedServiceIds
+            }),
+        })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                window.location.href = `http://localhost:8083/reservation.html?sessionId=${sessionId}`;
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+</body>
+</html>

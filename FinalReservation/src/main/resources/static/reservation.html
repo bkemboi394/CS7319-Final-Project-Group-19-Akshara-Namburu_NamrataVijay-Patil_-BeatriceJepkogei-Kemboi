@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrapper">
+    <h1>Make a Reservation</h1>
+    <div class="form-group">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+        <label for="contact">Your Contact:</label>
+        <input type="text" id="contact" name="contact" required>
+    </div>
+    <div class="form-group">
+        <label for="datetime">Reservation Date & Time:</label>
+        <input type="datetime-local" id="datetime" name="datetime" required>
+    </div>
+    <button id="submitBtn" class="btn">Submit Reservation</button>
+</div>
+
+<script>
+    document.getElementById('submitBtn').addEventListener('click', function(event) {
+        event.preventDefault();
+        const reservationData = {
+            name: document.getElementById('name').value,
+            contact: document.getElementById('contact').value,
+            datetime: document.getElementById('datetime').value
+        };
+
+        fetch('http://localhost:8083/reservations', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(reservationData),
+        })
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                // Redirect to confirmation page here
+                window.location.href = 'Confirmation.html';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('An error occurred, please try again.');
+            });
+    });
+</script>
+</body>
+</html>

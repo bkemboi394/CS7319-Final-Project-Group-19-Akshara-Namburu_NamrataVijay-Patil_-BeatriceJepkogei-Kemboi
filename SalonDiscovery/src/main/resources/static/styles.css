@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0e2433;
+    color: white;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+.search-form {
+    display: flex; /* Use flex to align form elements */
+    justify-content: center; /* Center the form contents */
+    align-items: center; /* Align items vertically */
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%; /* Ensure the form group takes full width of its parent */
+}
+
+
+
+
+.form-group label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"] {
+    flex-grow: 1; /* Continue to allow it to grow */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    min-width: 300px; /* Set a minimum width to make it appear longer */
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline from button */
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.salon-list {
+    max-width: 600px; /* Adjust based on desired width */
+    margin: 20px auto; /* Centers the box */
+    text-align: left; /* Keeps text aligned to the left within the box */
+    padding-left: 0; /* Resets any padding that might push content to the right */
+    width: 100%; /* Ensures the list takes full width, preventing unintended right alignment */
+}
+
+.salon-list a, .salon-list li {
+    text-decoration: none;
+    color: #333;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: left; /* Ensure individual items are also aligned left */
+    margin-left: 0; /* Corrects any left margin that might exist */
+    margin-right: auto; /* Aligns content to the left within its container */
+}
+
+
+.salon-list a:hover, .salon-list li:hover {
+    background-color: #eaeaea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-decoration: none;
+}
+
+
