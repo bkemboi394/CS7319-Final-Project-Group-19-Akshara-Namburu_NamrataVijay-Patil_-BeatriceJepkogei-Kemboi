@@ -16,7 +16,7 @@ Application setup and configuration
 - Download the Project as a whole from the repository
 - Upon Successful installation of the platform navigate to the startup screen and select **Open** and load the project as a maven project from the folder where you downloaded it to.
   - **Run** the project
-- Upon Successful compilation Navigate to Chrome -> **http://localhost:8080/registration**
+- Upon Successful compilation Navigate to Chrome -> **http://localhost:8080/api/SalonLink/registration**
 
 Application Execution
 - Give the User Details on the registration page -> Register with details
